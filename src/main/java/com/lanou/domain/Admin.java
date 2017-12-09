@@ -1,5 +1,6 @@
 package com.lanou.domain;
 
+
 import org.springframework.stereotype.Component;
 
 /**
@@ -8,16 +9,32 @@ import org.springframework.stereotype.Component;
 @Component
 public class Admin {
     private int adminId;
-//    @NotBlank(message = "{admin.adminCode.NottBlank}")
-//    @Length(max=6, min=3, message="{username.length}")
     private String adminCode;
-//    @NotBlank(message = "{admin.Pwd.NotBlank}")
-//    @Pattern(regexp = "/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{3,8}$/", message = "密码必须是3~8位数字和字母的组合")
     private String Pwd;
     private String name;
     private String telephone;
     private String email;
     private String enrolldate;
+
+    private Role role;
+    private AdminRole adminRole;
+    private Module module;
+
+    @Override
+    public String toString() {
+        return "Admin{" +
+                "adminId=" + adminId +
+                ", adminCode='" + adminCode + '\'' +
+                ", Pwd='" + Pwd + '\'' +
+                ", name='" + name + '\'' +
+                ", telephone='" + telephone + '\'' +
+                ", email='" + email + '\'' +
+                ", enrolldate='" + enrolldate + '\'' +
+                ", role=" + role +
+                ", adminRole=" + adminRole +
+                ", module=" + module +
+                '}';
+    }
 
     public Admin() {
     }
@@ -35,18 +52,7 @@ public class Admin {
         this.enrolldate = enrolldate;
     }
 
-    @Override
-    public String toString() {
-        return "AdminInfo{" +
-                "adminId=" + adminId +
-                ", adminCode='" + adminCode + '\'' +
-                ", Pwd='" + Pwd + '\'' +
-                ", name='" + name + '\'' +
-                ", telephone='" + telephone + '\'' +
-                ", email='" + email + '\'' +
-                ", enrolldate='" + enrolldate + '\'' +
-                '}';
-    }
+
 
     public int getAdminId() {
         return adminId;
@@ -104,7 +110,27 @@ public class Admin {
         this.enrolldate = enrolldate;
     }
 
+    public Role getRole() {
+        return role;
+    }
 
+    public void setRole(Role role) {
+        this.role = role;
+    }
 
+    public AdminRole getAdminRole() {
+        return adminRole;
+    }
 
+    public void setAdminRole(AdminRole adminRole) {
+        this.adminRole = adminRole;
+    }
+
+    public Module getModule() {
+        return module;
+    }
+
+    public void setModule(Module module) {
+        this.module = module;
+    }
 }

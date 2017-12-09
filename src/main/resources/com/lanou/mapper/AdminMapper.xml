@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper
-        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lanou.mapper.AdminMapper">
     <resultMap id="adminMap" type="Admin">
@@ -11,9 +10,34 @@
         <result column="telephone" property="telephone"/>
         <result column="email" property="email"/>
         <result column="enrolldate" property="enrolldate"/>
+
+        <association property="adminRole" javaType="AdminRole">
+            <result column="admin_id" jdbcType="INTEGER" property="adminId"/>
+            <result column="role_id" jdbcType="INTEGER" property="roleId"/>
+        </association>
+
+        <association property="role" javaType="Role">
+            <result column="role_id" jdbcType="INTEGER" property="roleId"/>
+            <result column="role_name" jdbcType="VARCHAR" property="roleName"/>
+        </association>
     </resultMap>
     <select id="login" resultMap="adminMap">
-        SELECT * FROM admin_info WHERE admin_code = #{adminCode}
+        SELECT *
+        FROM admin_info
+        WHERE admin_code = #{adminCode}
+    </select>
+
+    <select id="findAll" resultMap="adminMap">
+        SELECT
+            ad.admin_id,
+            ad.name,
+            mi.module_Name
+        FROM admin_info ad, role_info ri, admin_role ar, module_info mi, role_module rm
+        WHERE ar.admin_id = ad.admin_id
+              AND ar.role_id = ri.role_id
+              AND mi.module_id = rm.module_id
+              AND ri.role_id = rm.role_id
+
     </select>
 
 

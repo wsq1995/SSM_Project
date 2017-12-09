@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lanou.mapper.RoleMapper">
+
+    <resultMap id="roleMap" type="AdminRoleModule">
+        <id column="admin_id" property="adminId"/>
+        <result column="name" property="name"/>
+
+        <association property="module" javaType="Module">
+            <result column="module_id" property="moduleId"/>
+            <result column="module_Name" property="moduleName"/>
+        </association>
+
+    </resultMap>
+
+    <!--<select id="findAllRole" resultMap="roleMap">-->
+        <!--SELECT *-->
+        <!--FROM admin_info ad, role_info ri, admin_role ar, module_info mi, role_module rm-->
+        <!--WHERE ar.admin_id = ad.admin_id AND ar.role_id = ri.role_id-->
+              <!--AND mi.module_id = rm.module_id AND ri.role_id = rm.role_id-->
+    <!--</select>-->
+
+
+</mapper>

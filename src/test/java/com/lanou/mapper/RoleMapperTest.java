@@ -1,6 +1,5 @@
 package com.lanou.mapper;
 
-import com.lanou.domain.Admin;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -11,24 +10,16 @@ import javax.annotation.Resource;
 import static org.junit.Assert.*;
 
 /**
- * Created by dllo on 17/12/7.
+ * Created by dllo on 17/12/8.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:SSM-mybatis.xml")
-public class AdminMapperTest {
+public class RoleMapperTest {
     @Resource
-    private AdminMapper adminMapper;
-
+    private RoleMapper roleMapper;
     @Test
-    public void login() throws Exception {
-        Admin admin = new Admin();
-        adminMapper.login(admin);
+    public void findAllRole() throws Exception {
+        roleMapper.findAllRole().forEach(System.out::println);
     }
-
-    @Test
-    public void findAll() throws Exception {
-        adminMapper.findAll().forEach(System.out::println);
-    }
-
 
 }

@@ -18,14 +18,17 @@
                         "verifyCode": $("#verifyCode").val(),
                     },
                     success: function (result) {
-                        if (result == "nameError"){
-                            document.getElementById('nameError').innerHTML='用户名为空'
-                        }else if (result == 'PwdError'){
-                            document.getElementById('PwdError').innerHTML='密码不能为空'
-                        }else if (result == 'codeError'){
-                            document.getElementById('codeError').innerHTML='验证码不能为空'
+                        if (result == "nameError") {
+                            document.getElementById('nameError').innerHTML = '用户名为空'
+                        } else if (result == 'PwdError') {
+                            document.getElementById('PwdError').innerHTML = '密码不能为空'
+                        } else if (result == 'codeError') {
+                            document.getElementById('codeError').innerHTML = '验证码不能为空'
                         }
-                        window.location.href = "index"
+                        if (result == 'index') {
+                            window.location.href = "index"
+                        }
+
                     },
                 })
             })
@@ -61,7 +64,6 @@
             <td class="login_button" colspan="2">
                 <a id="login"><img src="../images/login_btn.png"/></a>
             </td>
-            <!--<td><span class="required">用户名或密码错误，请重试</span></td>-->
         </tr>
     </table>
 </div>

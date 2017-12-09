@@ -11,4 +11,6 @@ public interface AdmainService {
 
     //    查询所有
     String login(Admin admin,String verifyCode);
+
+    List<Admin> findAll();
 }

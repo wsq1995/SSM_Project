@@ -2,6 +2,7 @@ package com.lanou.controller;
 
 import com.lanou.domain.Admin;
 import com.lanou.service.AdmainService;
+import com.lanou.utils.AjaxResult;
 import com.lanou.utils.VerifyCode;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,5 +46,11 @@ public class AdminController {
         VerifyCode.output(image, os);
     }
 
+
+    @RequestMapping("/AdminFindAll")
+    @ResponseBody
+    public AjaxResult AdminFindAll(){
+        return new AjaxResult(admainService.findAll());
+    }
 
 }

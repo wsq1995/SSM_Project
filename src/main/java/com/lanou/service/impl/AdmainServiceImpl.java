@@ -35,4 +35,9 @@ public class AdmainServiceImpl implements AdmainService {
         }
         return "index";
     }
+
+    @Override
+    public List<Admin> findAll() {
+        return adminMapper.findAll();
+    }
 }
