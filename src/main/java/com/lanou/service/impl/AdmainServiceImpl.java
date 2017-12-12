@@ -14,8 +14,8 @@ import java.util.List;
  */
 @Service
 public class AdmainServiceImpl implements AdmainService {
-    @Resource
-    private AdminMapper adminMapper;
+//    @Resource
+//    private AdminMapper adminMapper;
 
     @Resource
     private HttpSession session;
@@ -36,8 +36,4 @@ public class AdmainServiceImpl implements AdmainService {
         return "index";
     }
 
-    @Override
-    public List<Admin> findAll() {
-        return adminMapper.findAll();
-    }
 }

@@ -1,5 +1,6 @@
 package com.lanou.mapper;
 
+import com.lanou.domain.Role;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -15,11 +16,19 @@ import static org.junit.Assert.*;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:SSM-mybatis.xml")
 public class RoleMapperTest {
+
     @Resource
     private RoleMapper roleMapper;
+
     @Test
-    public void findAllRole() throws Exception {
-        roleMapper.findAllRole().forEach(System.out::println);
+    public void saveRole() throws Exception {
+        Role role = new Role("校长");
+        roleMapper.addRole(role);
+    }
+
+    @Test
+    public void findAll() throws Exception {
+        roleMapper.findAll().forEach(System.out::println);
     }
 
 }

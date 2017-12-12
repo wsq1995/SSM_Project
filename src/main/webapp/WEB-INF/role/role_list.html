@@ -14,31 +14,26 @@
         }
     </script>
     <script type="text/javascript">
-
-                $.ajax({
-                url: "/AdminFindAll",
-                success: function (result) {
-                    if (result.code == "0"){
-                        for (var i= 0;i < result.data.length;i++){
-                            var admin = result.data[i];
-                            var adminId = $("<td></td>").text(admin.adminId);
-                            var name =  $("<td></td>").text(admin.name);
-                            var moduleName = $("<td></td>").text(admin.module.moduleName);
-                            var p = $("<td></td>").append('<input id="updaet" type="button" value="修改"  ' +
-                                    'onclick="updateRole(this)" class="btn_modify"/>'+'<input id="delete" type="button" value="删除"  onclick="deleteRole(this)" class="btn_delete"/>')
-                            var tr = $("<tr></tr>").append(adminId).append(name).append(moduleName).append(p);
-                            $("#datalist").append(tr);
-                        }
+        $.ajax({
+            url: "/AdminFindAll",
+            success: function (result) {
+                if (result.code == "0") {
+                    for (var i = 0; i < result.data.length; i++) {
+                        var stu = result.data[i];
+                        var roleId = $("<td></td>").text(stu.roleId);
+                        var roleName = $("<td></td>").text(stu.roleName);
+                        var moduleName = $("<td></td>").text(stu.module.moduleName);
+                        var p = $("<td></td>").append('<input id="updaet" type="button" value="修改"  ' +
+                                'onclick="updateRole(this)" class="btn_modify"/>' +
+                                '<input id="delete" type="button" value="删除"  onclick="deleteRole(this)" class="btn_delete"/>')
+                        var tr = $("<tr></tr>").append(roleId).append(roleName).append(moduleName).append(p);
+                        $("#datalist").append(tr);
                     }
                 }
-            })
-
-        function updateRole() {
-            window.location.href = "role_modi";
-        }
-
-        function deleteRole() {
-            window.location.href="btn_delete";
+            }
+        });
+        function AddList() {
+            window.location.href="/role_Add"
         }
     </script>
 </head>
@@ -50,7 +45,7 @@
 <div id="navi">
     <ul id="menu">
         <li><a href="../index.html" class="index_off"></a></li>
-        <li><a href="../role/role_list.html" class="role_on"></a></li>
+        <li><a href="" class="role_on"></a></li>
         <li><a href="../admin/admin_list.html" class="admin_off"></a></li>
         <li><a href="../fee/fee_list.html" class="fee_off"></a></li>
         <li><a href="../account/account_list.html" class="account_off"></a></li>
@@ -63,17 +58,17 @@
 </div>
 <div id="main">
     <form action="" method="">
-        <!--查询-->
+
         <div class="search_add">
-            <input type="button" value="增加" class="btn_add" onclick="location.href='role_add.html';"/>
+            <input id="inp" type="button" value="增加" class="btn_add" onclick="AddList(this)" />
         </div>
+
         <!--删除的操作提示-->
         <div id="operate_result_info" class="operate_success">
             <img src="/images/close.png" onclick="this.parentNode.style.display='none';"/>
             删除成功！
         </div>
-        <!--删除错误！该角色被使用，不能删除。-->
-        <!--数据区域：用表格展示数据-->
+
         <div id="data">
             <table id="datalist">
                 <tr>
@@ -82,17 +77,9 @@
                     <th class="width600">拥有的权限</th>
                     <th class="td_modi">操作</th>
                 </tr>
-                <!--<tr>-->
-                    <!--<td>1</td>-->
-                    <!--<td>贾强</td>-->
-                    <!--<td>角色管理、管理员管理、资费管理、账务账号、业务账号、账单、报表</td>-->
-                    <!--<td>-->
-                        <!--<input id="update" type="button" value="update" class="btn_modify" onclick="location.href='role_mod.html';"/>-->
-                        <!--<input type="button" value="delete" class="btn_delete" onclick="deleteRole();"/>-->
-                    <!--</td>-->
-                <!--</tr>-->
             </table>
         </div>
+
         <!--分页-->
         <div id="pages">
             <a href="#">上一页</a>

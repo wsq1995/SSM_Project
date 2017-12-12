@@ -1,24 +1,45 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.lanou.mapper.RoleMapper">
 
-    <resultMap id="roleMap" type="AdminRoleModule">
-        <id column="admin_id" property="adminId"/>
-        <result column="name" property="name"/>
+    <resultMap id="roleMap" type="Role">
+
+        <result column="role_id" property="roleId"/>
+        <result column="role_name" property="roleName"/>
 
         <association property="module" javaType="Module">
-            <result column="module_id" property="moduleId"/>
+            <id column="module_id" property="moduleId"/>
             <result column="module_Name" property="moduleName"/>
+        </association>
+
+        <association property="roleModule" javaType="RoleModule">
+            <id column="role_id" property="roleId"/>
+            <result column="module_id" property="moduleId"/>
         </association>
 
     </resultMap>
 
-    <!--<select id="findAllRole" resultMap="roleMap">-->
-        <!--SELECT *-->
-        <!--FROM admin_info ad, role_info ri, admin_role ar, module_info mi, role_module rm-->
-        <!--WHERE ar.admin_id = ad.admin_id AND ar.role_id = ri.role_id-->
-              <!--AND mi.module_id = rm.module_id AND ri.role_id = rm.role_id-->
-    <!--</select>-->
+    <!--查询所有角色-->
+    <select id="findAll" resultMap="roleMap">
+        SELECT * FROM module_info m,role_info ro,role_module rm
+        WHERE rm.module_id = m.module_id and rm.role_id = ro.role_id
+    </select>
 
+    <!--添加角色-->
+    <insert id="addRole" useGeneratedKeys="true" keyProperty="roleId">
+        INSERT role_info VALUES (#{roleId},#{roleName})
+    </insert>
+
+    <!--插入中间表-->
+    <!--mybatis只能识别param-->
+    <insert id="addtModule">
+        INSERT INTO role_module (role_id, module_id) VALUES (#{param1}, #{param2});
+    </insert>
+
+    <!--根据名字查-->
+    <!--<select id="findByName" resultMap="roleMap">-->
+        <!--SELECT * FROM role_info WHERE role_name = #{roleName}-->
+    <!--</select>-->
 
 </mapper>

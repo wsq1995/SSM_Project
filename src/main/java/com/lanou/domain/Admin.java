@@ -18,7 +18,6 @@ public class Admin {
 
     private Role role;
     private AdminRole adminRole;
-    private Module module;
 
     @Override
     public String toString() {
@@ -32,7 +31,6 @@ public class Admin {
                 ", enrolldate='" + enrolldate + '\'' +
                 ", role=" + role +
                 ", adminRole=" + adminRole +
-                ", module=" + module +
                 '}';
     }
 
@@ -126,11 +124,4 @@ public class Admin {
         this.adminRole = adminRole;
     }
 
-    public Module getModule() {
-        return module;
-    }
-
-    public void setModule(Module module) {
-        this.module = module;
-    }
 }

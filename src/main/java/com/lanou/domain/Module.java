@@ -15,6 +15,10 @@ public class Module {
         this.moduleName = moduleName;
     }
 
+    public Module(String moduleName) {
+        this.moduleName = moduleName;
+    }
+
     @Override
     public String toString() {
         return "Module{" +

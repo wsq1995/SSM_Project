@@ -12,7 +12,6 @@ public interface AdminMapper {
     Admin login(Admin admin);
 
 
-    List<Admin> findAll();
 
 
 

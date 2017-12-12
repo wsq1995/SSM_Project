@@ -1,5 +1,7 @@
 package com.lanou.domain;
 
+import java.util.List;
+
 /**
  * Created by dllo on 17/12/8.
  */
@@ -7,11 +9,18 @@ public class Role {
     private int roleId;
     private String roleName;
 
+    private Module module;
+    private RoleModule roleModule;
+
     public Role() {
     }
 
     public Role(int roleId) {
         this.roleId = roleId;
+    }
+
+    public Role(String roleName) {
+        this.roleName = roleName;
     }
 
     public Role(int roleId, String roleName) {
@@ -24,7 +33,25 @@ public class Role {
         return "Role{" +
                 "roleId=" + roleId +
                 ", roleName='" + roleName + '\'' +
+                ", module=" + module +
+                ", roleModule=" + roleModule +
                 '}';
+    }
+
+    public Module getModule() {
+        return module;
+    }
+
+    public void setModule(Module module) {
+        this.module = module;
+    }
+
+    public RoleModule getRoleModule() {
+        return roleModule;
+    }
+
+    public void setRoleModule(RoleModule roleModule) {
+        this.roleModule = roleModule;
     }
 
     public int getRoleId() {
@@ -42,4 +69,5 @@ public class Role {
     public void setRoleName(String roleName) {
         this.roleName = roleName;
     }
+
 }

@@ -47,10 +47,4 @@ public class AdminController {
     }
 
 
-    @RequestMapping("/AdminFindAll")
-    @ResponseBody
-    public AjaxResult AdminFindAll(){
-        return new AjaxResult(admainService.findAll());
-    }
-
 }

@@ -4,22 +4,20 @@
 <mapper namespace="com.lanou.mapper.AdminMapper">
     <resultMap id="adminMap" type="Admin">
         <id column="admin_id" property="adminId"/>
+        <result column="name" property="name"/>
         <result column="admin_code" property="adminCode"/>
         <result column="password" property="Pwd"/>
-        <result column="name" property="name"/>
-        <result column="telephone" property="telephone"/>
-        <result column="email" property="email"/>
-        <result column="enrolldate" property="enrolldate"/>
 
-        <association property="adminRole" javaType="AdminRole">
-            <result column="admin_id" jdbcType="INTEGER" property="adminId"/>
-            <result column="role_id" jdbcType="INTEGER" property="roleId"/>
-        </association>
+        <!--<association property="module" javaType="Module">-->
+            <!--<id column="module_id" property="moduleId"/>-->
+            <!--<result column="module_Name" property="moduleName"/>-->
+        <!--</association>-->
 
-        <association property="role" javaType="Role">
-            <result column="role_id" jdbcType="INTEGER" property="roleId"/>
-            <result column="role_name" jdbcType="VARCHAR" property="roleName"/>
-        </association>
+        <!--<association property="role" javaType="Role">-->
+            <!--<id column="role_id" property="roleId"/>-->
+            <!--<result column="role_name" property="roleName"/>-->
+        <!--</association>-->
+
     </resultMap>
     <select id="login" resultMap="adminMap">
         SELECT *
@@ -27,18 +25,10 @@
         WHERE admin_code = #{adminCode}
     </select>
 
-    <select id="findAll" resultMap="adminMap">
-        SELECT
-            ad.admin_id,
-            ad.name,
-            mi.module_Name
-        FROM admin_info ad, role_info ri, admin_role ar, module_info mi, role_module rm
-        WHERE ar.admin_id = ad.admin_id
-              AND ar.role_id = ri.role_id
-              AND mi.module_id = rm.module_id
-              AND ri.role_id = rm.role_id
-
-    </select>
+    <!--<select id="findAll" resultMap="adminMap">-->
+        <!--SELECT * FROM module_info m,role_info ro,role_module rm-->
+        <!--WHERE rm.module_id = m.module_id and rm.role_id = ro.role_id-->
+    <!--</select>-->
 
 
 </mapper>
