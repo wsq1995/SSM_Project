@@ -7,28 +7,47 @@
         <result column="name" property="name"/>
         <result column="admin_code" property="adminCode"/>
         <result column="password" property="Pwd"/>
+        <result column="telephone" property="telephone"/>
+        <result column="email" property="email"/>
+        <result column="enrolldate" property="enrolldate"/>
 
-        <!--<association property="module" javaType="Module">-->
-            <!--<id column="module_id" property="moduleId"/>-->
-            <!--<result column="module_Name" property="moduleName"/>-->
-        <!--</association>-->
+        <collection property="roles" ofType="Role">
+            <id column="role_id" property="roleId"/>
+            <result column="role_name" property="roleName"/>
+        </collection>
 
-        <!--<association property="role" javaType="Role">-->
-            <!--<id column="role_id" property="roleId"/>-->
-            <!--<result column="role_name" property="roleName"/>-->
-        <!--</association>-->
+        <collection property="adminRoles" ofType="AdminRole">
+            <id column="admin_id" property="adminId"/>
+            <result column="role_id" property="roleId"/>
+        </collection>
 
+        <collection property="roleModules" ofType="RoleModule">
+            <id column="role_id" property="roleId"/>
+            <result column="module_id" property="moduleId"/>
+        </collection>
     </resultMap>
     <select id="login" resultMap="adminMap">
         SELECT *
         FROM admin_info
         WHERE admin_code = #{adminCode}
     </select>
-
-    <!--<select id="findAll" resultMap="adminMap">-->
-        <!--SELECT * FROM module_info m,role_info ro,role_module rm-->
-        <!--WHERE rm.module_id = m.module_id and rm.role_id = ro.role_id-->
-    <!--</select>-->
+    <select id="findAllAdmin" resultMap="adminMap">
+        SELECT
+            a.admin_id                                 admin_id,
+            a.admin_code                               admin_code,
+            a.password                                 password,
+            a.name                                     name,
+            a.telephone                                telephone,
+            a.email                                    email,
+            a.enrolldate                               enrolldate,
+            group_concat(ri.role_name SEPARATOR ',')   role_name
+        FROM admin_info a LEFT JOIN (admin_role ar, module_info mi, role_info ri, role_module rm)
+                ON a.admin_id = ar.admin_id
+                   AND ar.role_id = ri.role_id
+                   AND ri.role_id = rm.role_id
+                   AND rm.module_id = mi.module_id
+        GROUP BY a.admin_id
+    </select>
 
 
 </mapper>

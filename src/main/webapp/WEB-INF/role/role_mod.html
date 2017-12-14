@@ -8,12 +8,12 @@
     <link type="text/css" rel="stylesheet" media="all" href="../styles/global_color.css"/>
     <script src="/js/jquery-3.2.1.js"></script>
     <script language="javascript" type="text/javascript">
-
         //保存成功的提示消息
         function showResult() {
             showResultDiv(true);
             window.setTimeout("showResultDiv(false);", 3000);
-            window.location.href = "list"
+            window.setTimeout(
+                    location.href = "list"),6000
         }
         function showResultDiv(flag) {
             var divResult = document.getElementById("save_result_info");
@@ -22,6 +22,7 @@
             else
                 divResult.style.display = "none";
         }
+
         $(document).ready(function () {
             $.ajax({
                 type: "POST",
@@ -30,7 +31,17 @@
                     $("#in").val(result)
                 }
             })
-        })
+
+            $.ajax({
+                url: "/findModuleId",
+                success: function (result) {
+                    for (var i = 0; i < result.length; i++) {
+                        var u = "inp" + result[i].moduleId;
+                        $("#" + u).prop("checked", true)
+                    }
+                }
+            })
+        });
         $(document).ready(function () {
             $("#btn").click(function () {
                 var url = window.location.search;
@@ -38,14 +49,18 @@
 
                 var p = [];
                 var moduleId = $('input[name=inp0]');
-                p.push(moduleId);
+                for (var i = 0; i < moduleId.length; i++) {
+                    if (moduleId[i].checked) {
+                        p.push(moduleId[i].value);
+                    }
+                }
                 $.ajax({
                     url: "/updateRole",
                     traditional: true,
                     data: {
                         "roleName": $("#in").val(),
                         "roleId": roleId,
-                        "module":p
+                        "module": p
                     },
                     success: function () {
                         showResult();
@@ -63,8 +78,8 @@
 <div id="navi">
     <ul id="menu">
         <li><a href="../index.html" class="index_off"></a></li>
-        <li><a href="role_list.html" class="role_on"></a></li>
-        <li><a href="../admin/admin_list.html" class="admin_off"></a></li>
+        <li><a class="role_on"></a></li>
+        <li><a id="a1" class="admin_off"></a></li>
         <li><a href="../fee/fee_list.html" class="fee_off"></a></li>
         <li><a href="../account/account_list.html" class="account_off"></a></li>
         <li><a href="../service/service_list.html" class="service_off"></a></li>
@@ -86,20 +101,20 @@
     <div class="input_info_high">
         <div class="input_info_scroll">
             <ul>
-                <li><input type="checkbox" value=1 name="inp0"/>管理员管理</li>
-                <li><input type="checkbox" value=2 name="inp0"/>角色管理</li>
-                <li><input type="checkbox" value=3 name="inp0"/>资费管理</li>
-                <li><input type="checkbox" value=4 name="inp0"/>账务账号</li>
-                <li><input type="checkbox" value=5 name="inp0"/>业务账号</li>
-                <li><input type="checkbox" value=6 name="inp0"/>账单</li>
-                <li><input type="checkbox" value=7 name="inp0"/>报表</li>
+                <li><input type="checkbox" name="inp0" value=1 />管理员管理</li>
+                <li><input type="checkbox" name="inp0" value=2 />角色管理</li>
+                <li><input type="checkbox" name="inp0" value=3 />资费管理</li>
+                <li><input type="checkbox" name="inp0" value=4 />账务账号</li>
+                <li><input type="checkbox" name="inp0" value=5 />业务账号</li>
+                <li><input type="checkbox" name="inp0" value=6 />账单</li>
+                <li><input type="checkbox" name="inp0" value=7 />报表</li>
             </ul>
         </div>
         <!--<div class="validate_msg_tiny">至少选择一个权限</div>-->
     </div>
     <div class="button_info clearfix">
         <input type="button" value="保存" class="btn_save" id="btn"/>
-        <input type="button" value="取消" class="btn_save"/>
+        <input type="button" value="取消" class="btn_save" onclick="javascript:window.history.back(-1)"/>
     </div>
 </div>
 <!--主要区域结束-->
@@ -109,4 +124,9 @@
     <span>版权所有(C)云科技有限公司 </span>
 </div>
 </body>
+<script>
+    $("#a1").click(function () {
+        window.location.href = "/admin_list"
+    })
+</script>
 </html>

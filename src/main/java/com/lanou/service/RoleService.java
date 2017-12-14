@@ -63,6 +63,9 @@ public interface RoleService {
     void deleteRoleModule(int roleId);
 
     //    在重新添加角色权限
-    void addRoleModule(Integer[] module);
+    void addRoleModule(int roleId ,int[] module);
+
+    //    回显权限
+    List<RoleModule> roleModules(int roleId);
 
 }

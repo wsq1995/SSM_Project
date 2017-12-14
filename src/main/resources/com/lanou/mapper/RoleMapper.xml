@@ -18,6 +18,10 @@
         </association>
 
     </resultMap>
+    <resultMap id="roleModuleMap" type="RoleModule">
+        <id column="role_id" property="roleId"/>
+        <result column="module_id" property="moduleId"/>
+    </resultMap>
 
     <!--查询所有角色-->
     <select id="findAll" resultMap="roleMap">
@@ -56,6 +60,11 @@
         WHERE role_id = #{roleId}
     </select>
 
+    <!--回显权限-->
+    <select id="roleModules" resultMap="roleModuleMap">
+        SELECT * FROM role_module WHERE role_id = #{param1}
+    </select>
+
     <!--编辑角色-->
     <update id="updateRole">
         UPDATE role_info
@@ -84,7 +93,7 @@
 
     <!--删除中间表的数据-->
     <delete id="deleteRoleModule" parameterType="_int">
-        DELETE FROM role_module WHERE role_id = #{roleId}
+        DELETE FROM role_module WHERE role_id = #{p}
     </delete>
 
 </mapper>

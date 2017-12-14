@@ -33,10 +33,17 @@ public class AdminController {
     }
 
     @RequestMapping("/index")
-    public String index(){
+    public String index() {
         return "index";
     }
 
+    /**
+     * 验证码验证
+     *
+     * @param session
+     * @param response
+     * @throws IOException
+     */
     @RequestMapping("/getVerifyCode")
     public void getVerifycode(HttpSession session, HttpServletResponse response) throws IOException {
         VerifyCode verifyCode = new VerifyCode();
@@ -44,6 +51,24 @@ public class AdminController {
         session.setAttribute("verifyCode", verifyCode.getText());
         OutputStream os = response.getOutputStream();
         VerifyCode.output(image, os);
+    }
+
+    /**
+     * 转到查询所有管理员界面
+     * @return
+     */
+    @RequestMapping("/admin_list")
+    public String admin_list() {
+        return "admin/admin_list";
+    }
+
+    /**
+     * 查询所有管理员
+     */
+    @RequestMapping("/findAllAdmin")
+    @ResponseBody
+    public AjaxResult findAllAdmin(){
+        return new AjaxResult(admainService.findAllAdmin());
     }
 
 

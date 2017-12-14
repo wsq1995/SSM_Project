@@ -12,6 +12,10 @@ public class Role {
     private Module module;
     private RoleModule roleModule;
 
+//    角色里的
+//    private List<Module>modules;
+//    private List<AdminRole>adminRoles;
+//    private List<RoleModule>roleModules;
     public Role() {
     }
 
@@ -70,4 +74,27 @@ public class Role {
         this.roleName = roleName;
     }
 
+//    public List<Module> getModules() {
+//        return modules;
+//    }
+//
+//    public void setModules(List<Module> modules) {
+//        this.modules = modules;
+//    }
+//
+//    public List<AdminRole> getAdminRoles() {
+//        return adminRoles;
+//    }
+//
+//    public void setAdminRoles(List<AdminRole> adminRoles) {
+//        this.adminRoles = adminRoles;
+//    }
+//
+//    public List<RoleModule> getRoleModules() {
+//        return roleModules;
+//    }
+//
+//    public void setRoleModules(List<RoleModule> roleModules) {
+//        this.roleModules = roleModules;
+//    }
 }

@@ -59,5 +59,9 @@ public class RoleMapperTest {
         roleMapper.findNameById(role.getRoleId());
     }
 
+    @Test
+    public void roleModules() throws Exception {
+        roleMapper.roleModules(200).forEach(System.out::println);
+    }
 
 }

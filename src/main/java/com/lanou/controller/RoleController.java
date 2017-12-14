@@ -84,10 +84,10 @@ public class RoleController {
     //    修改角色
     @RequestMapping("/updateRole")
     @ResponseBody
-    public Role updateRole(Role role,Integer[] module) {
+    public Role updateRole(Role role,int[] module) {
         roleService.updateRole(role);
         roleService.deleteRoleModule(role.getRoleId());
-        roleService.addRoleModule(module);
+        roleService.addRoleModule(role.getRoleId(),module);
         return role;
     }
 
@@ -97,6 +97,14 @@ public class RoleController {
         roleService.deleteRole(role.getRoleId());
         roleService.deleteRoleModule(role.getRoleId());
         return role;
+    }
+
+    //回显权限
+    @RequestMapping("/findModuleId")
+    @ResponseBody
+    public List<RoleModule> findModuleId(HttpSession session){
+        int roleId = (int) session.getAttribute("roleId");
+        return roleService.roleModules(roleId);
     }
 
 

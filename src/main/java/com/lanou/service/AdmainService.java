@@ -10,6 +10,9 @@ import java.util.List;
 public interface AdmainService {
 
     //    查询所有
-    String login(Admin admin,String verifyCode);
+    String login(Admin admin, String verifyCode);
+
+    //    查询所有管理员
+    List<Admin> findAllAdmin();
 
 }

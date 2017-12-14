@@ -17,14 +17,19 @@ import static org.junit.Assert.*;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:SSM-mybatis.xml")
 public class AdminMapperTest {
+
     @Resource
     private AdminMapper adminMapper;
-
 
     @Test
     public void login() throws Exception {
         Admin admin = new Admin();
         adminMapper.login(admin);
+    }
+
+    @Test
+    public void findAllAdmin() throws Exception {
+        adminMapper.findAllAdmin().forEach(System.out::println);
     }
 
 

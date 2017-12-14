@@ -3,6 +3,8 @@ package com.lanou.domain;
 
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 /**
  * Created by dllo on 17/12/7.
  */
@@ -16,8 +18,10 @@ public class Admin {
     private String email;
     private String enrolldate;
 
-    private Role role;
-    private AdminRole adminRole;
+    private List<Role>roles;
+    private List<Module>modules;
+    private List<AdminRole>adminRoles;
+    private List<RoleModule>roleModules;
 
     @Override
     public String toString() {
@@ -29,8 +33,10 @@ public class Admin {
                 ", telephone='" + telephone + '\'' +
                 ", email='" + email + '\'' +
                 ", enrolldate='" + enrolldate + '\'' +
-                ", role=" + role +
-                ", adminRole=" + adminRole +
+                ", roles=" + roles +
+                ", modules=" + modules +
+                ", adminRoles=" + adminRoles +
+                ", roleModules=" + roleModules +
                 '}';
     }
 
@@ -108,20 +114,35 @@ public class Admin {
         this.enrolldate = enrolldate;
     }
 
-    public Role getRole() {
-        return role;
+    public List<Role> getRoles() {
+        return roles;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
 
-    public AdminRole getAdminRole() {
-        return adminRole;
+    public List<Module> getModules() {
+        return modules;
     }
 
-    public void setAdminRole(AdminRole adminRole) {
-        this.adminRole = adminRole;
+    public void setModules(List<Module> modules) {
+        this.modules = modules;
     }
 
+    public List<AdminRole> getAdminRoles() {
+        return adminRoles;
+    }
+
+    public void setAdminRoles(List<AdminRole> adminRoles) {
+        this.adminRoles = adminRoles;
+    }
+
+    public List<RoleModule> getRoleModules() {
+        return roleModules;
+    }
+
+    public void setRoleModules(List<RoleModule> roleModules) {
+        this.roleModules = roleModules;
+    }
 }

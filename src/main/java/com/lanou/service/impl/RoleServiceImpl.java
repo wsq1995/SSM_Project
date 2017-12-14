@@ -86,11 +86,21 @@ public class RoleServiceImpl implements RoleService {
      * @param module
      */
     @Override
-    public void addRoleModule(Integer[] module) {
+    public void addRoleModule(int roleId,int[] module) {
         for (int i = 0; i < module.length; i++) {
             Integer integer = module[i];
-            roleMapper.addRoleModule(integer);
+            roleMapper.addRoleModule(roleId,integer);
         }
+    }
+
+    /**
+     * 回显权限
+     * @param roleId
+     * @return
+     */
+    @Override
+    public List<RoleModule> roleModules(int roleId) {
+        return roleMapper.roleModules(roleId);
     }
 
 

@@ -30,7 +30,8 @@
                         var roleId = $("<td></td>").text(stu.roleId);
                         var roleName = $("<td></td>").text(stu.roleName);
                         var moduleName = $("<td></td>").text(stu.module.moduleName);
-                        var p = $("<td></td>").append('<input id="update" type="button" value="修改" ' + 'onclick="updateRole(' + stu.roleId + ')" class="btn_modify"/>' +
+                        var p = $("<td></td>").append(
+                                '<input id="update" type="button" value="修改" ' + 'onclick="updateRole(' + stu.roleId + ')" class="btn_modify"/>' +
                                 '<input id="del" type="button" value="删除" onclick="deleteRole(' + stu.roleId + ')" class="btn_delete"/>');
                         var tr = $("<tr></tr>").append(roleId).append(roleName).append(moduleName).append(p);
                         $("#datalist").append(tr);
@@ -66,7 +67,7 @@
     <ul id="menu">
         <li><a href="../index.html" class="index_off"></a></li>
         <li><a href="" class="role_on"></a></li>
-        <li><a href="../admin/admin_list.html" class="admin_off"></a></li>
+        <li><a id="a1" class="admin_off"></a></li>
         <li><a href="../fee/fee_list.html" class="fee_off"></a></li>
         <li><a href="../account/account_list.html" class="account_off"></a></li>
         <li><a href="../service/service_list.html" class="service_off"></a></li>
@@ -116,4 +117,10 @@
     <p>版权所有(C)云科技有限公司 </p>
 </div>
 </body>
+<script>
+    $("#a1").click(function () {
+        window.location.href = "/admin_list"
+    })
+</script>
+
 </html>
