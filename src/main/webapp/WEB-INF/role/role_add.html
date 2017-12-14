@@ -29,7 +29,6 @@
                 var moduleId = $('input[name=input0]');
                 for (var i = 0; i < moduleId.length; i++) {
                     if (moduleId[i].checked) {
-                        alert(moduleId[i].value);
                         module.push(moduleId[i].value);
                     }
                 }
@@ -48,6 +47,8 @@
                             document.getElementById("div1").innerHTML = '不能为空，且为20长度的字母、数字和汉字的组合'
                         } else if (result == "integerError") {
                             document.getElementById("div2").innerHTML = '至少选择一个权限'
+                        } else if (result == "nameExist") {
+                            document.getElementById("div1").innerHTML = '该名字已存在,不可重复添加'
                         }
                         else if (result == "add") {
                             document.getElementById("div1").innerHTML = '';

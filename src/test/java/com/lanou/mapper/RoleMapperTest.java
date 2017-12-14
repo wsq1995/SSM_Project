@@ -31,4 +31,33 @@ public class RoleMapperTest {
         roleMapper.findAll().forEach(System.out::println);
     }
 
+    @Test
+    public void findByName() throws Exception {
+        Role role = new Role("管理员");
+        roleMapper.findByName(role);
+    }
+
+    @Test
+    public void updateRole() throws Exception {
+        Role role = new Role();
+        role.setRoleId(340);
+        role.setRoleName("6666666");
+        roleMapper.updateRole(role);
+    }
+
+    @Test
+    public void deleteRole() throws Exception {
+        Role role = new Role();
+        role.setRoleId(339);
+        roleMapper.deleteRole(role.getRoleId());
+    }
+
+    @Test
+    public void findNameById() throws Exception {
+        Role role = new Role();
+        role.setRoleId(100);
+        roleMapper.findNameById(role.getRoleId());
+    }
+
+
 }

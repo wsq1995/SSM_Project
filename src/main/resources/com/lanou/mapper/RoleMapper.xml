@@ -4,7 +4,6 @@
 <mapper namespace="com.lanou.mapper.RoleMapper">
 
     <resultMap id="roleMap" type="Role">
-
         <result column="role_id" property="roleId"/>
         <result column="role_name" property="roleName"/>
 
@@ -22,13 +21,19 @@
 
     <!--查询所有角色-->
     <select id="findAll" resultMap="roleMap">
-        SELECT * FROM module_info m,role_info ro,role_module rm
-        WHERE rm.module_id = m.module_id and rm.role_id = ro.role_id
+        SELECT
+            r.role_id   role_id,
+            r.role_name role_name,
+            group_concat(m.module_name SEPARATOR ',')
+                        module_name
+        FROM role_info r LEFT JOIN (role_module rm, module_info m)
+                ON r.role_id = rm.role_id AND rm.module_id = m.module_id
+        GROUP BY r.role_id
     </select>
 
     <!--添加角色-->
     <insert id="addRole" useGeneratedKeys="true" keyProperty="roleId">
-        INSERT role_info VALUES (#{roleId},#{roleName})
+        INSERT role_info VALUES (#{roleId}, #{roleName})
     </insert>
 
     <!--插入中间表-->
@@ -38,8 +43,48 @@
     </insert>
 
     <!--根据名字查-->
-    <!--<select id="findByName" resultMap="roleMap">-->
-        <!--SELECT * FROM role_info WHERE role_name = #{roleName}-->
-    <!--</select>-->
+    <select id="findByName" resultMap="roleMap">
+        SELECT *
+        FROM role_info
+        WHERE role_name = #{roleName}
+    </select>
+
+    <!--根据id查名字-->
+    <select id="findNameById" resultMap="roleMap">
+        SELECT r.role_name
+        FROM role_info r
+        WHERE role_id = #{roleId}
+    </select>
+
+    <!--编辑角色-->
+    <update id="updateRole">
+        UPDATE role_info
+        SET role_name = #{roleName}
+        WHERE role_id = #{roleId}
+    </update>
+
+    <!--编辑权限-->
+    <update id="updateRoleModule">
+        UPDATE role_module
+        SET role_id = #{roleId} AND module_id = #{moduleId}
+    </update>
+
+
+    <!--重新插入中间表的数据-->
+    <insert id="addRoleModule" parameterType="_int">
+        INSERT INTO role_module VALUES (#{param1}, #{param2})
+    </insert>
+
+
+    <!--删除角色-->
+    <delete id="deleteRole">
+        DELETE FROM role_info
+        WHERE role_id = #{roleId}
+    </delete>
+
+    <!--删除中间表的数据-->
+    <delete id="deleteRoleModule" parameterType="_int">
+        DELETE FROM role_module WHERE role_id = #{roleId}
+    </delete>
 
 </mapper>

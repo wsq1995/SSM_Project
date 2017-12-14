@@ -21,14 +21,6 @@ public class RoleModule {
         this.moduleId = moduleId;
     }
 
-    @Override
-    public String toString() {
-        return "RoleModule{" +
-                "roleId=" + roleId +
-                ", moduleId=" + moduleId +
-                '}';
-    }
-
     public int getRoleId() {
         return roleId;
     }
@@ -59,5 +51,12 @@ public class RoleModule {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+    @Override
+    public String toString() {
+        return "RoleModule{" +
+                "roleId=" + roleId +
+                ", moduleId=" + moduleId +
+                '}';
     }
 }

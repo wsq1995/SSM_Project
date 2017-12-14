@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -49,13 +50,53 @@ public class RoleController {
     @ResponseBody
     public String addRole(Role role, Integer[] moduleId) {
         String s1 = roleService.addRole(role, moduleId);
-        System.out.println(s1);
         return s1;
     }
 
     @RequestMapping("/list")
     public String list() {
         return "role/role_list";
+    }
+
+
+    @RequestMapping("/update")
+    @ResponseBody
+    public String updateR(Role role, HttpSession session) {
+        session.setAttribute("roleId", role.getRoleId());
+        return "success";
+    }
+
+    //    回显
+    @RequestMapping(value = "/echo", produces = "text/html;charset=UTF-8")
+    @ResponseBody
+    public String echo(HttpSession session) {
+        int roleId = (int) session.getAttribute("roleId");
+        List<Role> ids = roleService.findNameById(roleId);
+        return ids.get(0).getRoleName();
+    }
+
+    //    跳转到修改页面
+    @RequestMapping("/up")
+    public String up() {
+        return "role/role_mod";
+    }
+
+    //    修改角色
+    @RequestMapping("/updateRole")
+    @ResponseBody
+    public Role updateRole(Role role,Integer[] module) {
+        roleService.updateRole(role);
+        roleService.deleteRoleModule(role.getRoleId());
+        roleService.addRoleModule(module);
+        return role;
+    }
+
+    //    删除角色
+    @RequestMapping("/delete")
+    public Role deleteRole(Role role) {
+        roleService.deleteRole(role.getRoleId());
+        roleService.deleteRoleModule(role.getRoleId());
+        return role;
     }
 
 

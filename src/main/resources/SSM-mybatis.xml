@@ -32,7 +32,7 @@
     <!--配置顾问-->
     <tx:advice id="myAdvisor" transaction-manager="transactionManager">
         <tx:attributes>
-            <tx:method name="add*" read-only="false"/>
+            <tx:method name="add*" read-only="false" propagation="REQUIRED"/>
             <tx:method name="delete*" read-only="false"/>
             <tx:method name="update*" read-only="false"/>
             <tx:method name="find*" read-only="true"/>
